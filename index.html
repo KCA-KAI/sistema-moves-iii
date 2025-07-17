@@ -673,13 +673,13 @@
                 <div class="account">ES44 0049 5450 0328 1627 1901</div>
             </div>
 
-            <!-- 🔧 FORMULARIO OPTIMIZADO PARA GITHUB PAGES -->
+            <!-- 🔧 FORMULARIO OPTIMIZADO Y CORREGIDO -->
             <form id="movesForm" action="https://script.google.com/macros/s/AKfycbw7E6zJsgoUqKVWOVOyr9AJO7VE7IsuKovXRMWZ4Qb80auq7iUGztlE-sFNhzxTZEhRxQ/exec" method="POST" enctype="multipart/form-data" target="submitFrame">
                 
                 <!-- DATOS OCULTOS PARA EL FORMULARIO -->
                 <input type="hidden" id="formDataJSON" name="data" value="">
                 <input type="hidden" name="source" value="github-pages">
-                <input type="hidden" name="version" value="4.0">
+                <input type="hidden" name="version" value="4.1-corregido">
                 
                 <!-- SECCIÓN 1: DATOS BÁSICOS -->
                 <div class="section">
@@ -705,20 +705,6 @@
                         <input type="text" id="dniCif" name="dniCif" required placeholder="Ej: 12345678A / B47123456" maxlength="9">
                     </div>
 
-                    <div class="conditional-field" id="representanteFields">
-                        <div class="form-group">
-                            <label for="representanteNombre">Representante - Nombre y apellidos</label>
-                            <input type="text" id="representanteNombre" name="representanteNombre" placeholder="Solo para empresas">
-                            <div class="help-text">CUMPLIMENTAR SOLO SI SOLICITA EMPRESA</div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="representanteDni">Representante - DNI</label>
-                            <input type="text" id="representanteDni" name="representanteDni" placeholder="12345678A" maxlength="9">
-                            <div class="help-text">CUMPLIMENTAR SOLO SI SOLICITA EMPRESA</div>
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <label for="email">Correo electrónico <span class="required">*</span></label>
                         <input type="email" id="email" name="email" required placeholder="ejemplo@email.com">
@@ -736,12 +722,12 @@
 
                     <div class="form-group">
                         <label for="municipio">Municipio <span class="required">*</span></label>
-                        <textarea id="municipio" name="municipio" required placeholder="Municipio" rows="3"></textarea>
+                        <input type="text" id="municipio" name="municipio" required placeholder="Valladolid">
                     </div>
 
                     <div class="form-group">
-                        <label for="codigo postal">Código postal <span class="required">*</span></label>
-                        <textarea id="codigo postal" name="codigo postal" required placeholder="Código postal" rows="3"></textarea>
+                        <label for="codigoPostal">Código postal <span class="required">*</span></label>
+                        <input type="text" id="codigoPostal" name="codigoPostal" required placeholder="47001" maxlength="5">
                     </div>
 
                     <div class="form-group">
@@ -755,6 +741,22 @@
                                 <input type="radio" id="discapacidadNo" name="discapacidad" value="No" required>
                                 <label for="discapacidadNo">No</label>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- 🔧 SECCIÓN REPRESENTANTE CORREGIDA - POSICIONADA AQUÍ -->
+                    <div class="conditional-field" id="representanteFields">
+                        <h4>👤 Datos del Representante (Solo empresas)</h4>
+                        <div class="form-group">
+                            <label for="representanteNombre">Representante - Nombre y apellidos</label>
+                            <input type="text" id="representanteNombre" name="representanteNombre" placeholder="Solo para empresas">
+                            <div class="help-text">CUMPLIMENTAR SOLO SI SOLICITA EMPRESA</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="representanteDni">Representante - DNI</label>
+                            <input type="text" id="representanteDni" name="representanteDni" placeholder="12345678A" maxlength="9">
+                            <div class="help-text">CUMPLIMENTAR SOLO SI SOLICITA EMPRESA</div>
                         </div>
                     </div>
                 </div>
@@ -870,7 +872,7 @@
 
                     <div class="conditional-field" id="achatarrramientoFields">
                         <div class="form-group">
-                            <label for="marcaModeloAchatarrrar">Marca y modelo del vehículo a achatarrar</label>
+                            <label for="marcaModeloAchatarrrar">Marca y el modelo vehículo a achatarrar</label>
                             <input type="text" id="marcaModeloAchatarrrar" name="marcaModeloAchatarrrar" placeholder="Ej: Ford Focus, Seat Ibiza">
                         </div>
 
@@ -880,12 +882,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="fechaItvAchatarrrar">Fecha ITV del vehículo a achatarrar</label>
+                            <label for="fechaItvAchatarrrar">Detallar la fecha ITV del vehículo a achatarrar</label>
                             <input type="text" id="fechaItvAchatarrrar" name="fechaItvAchatarrrar" placeholder="DD/MM/YYYY">
                         </div>
 
                         <div class="form-group">
-                            <label for="fechaPagoIvtm">Fecha de pago del último IVTM</label>
+                            <label for="fechaPagoIvtm">Detallar la fecha de pago del último IVTM</label>
                             <input type="date" id="fechaPagoIvtm" name="fechaPagoIvtm">
                         </div>
                     </div>
@@ -925,7 +927,7 @@
         </div>
     </div>
 
-    <!-- 🔧 JavaScript optimizado para GitHub Pages -->
+    <!-- 🔧 JavaScript optimizado y corregido -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('movesForm');
@@ -943,7 +945,6 @@
 
             // 🔍 VERIFICAR CONEXIÓN CON GOOGLE APPS SCRIPT
             function checkSystemStatus() {
-                // Verificar si la URL del formulario está configurada
                 const formAction = form.getAttribute('action');
                 if (formAction.includes('script.google.com')) {
                     statusIndicator.textContent = 'Sistema Operativo';
@@ -1133,7 +1134,7 @@
                 toggleConditionalFields();
             });
 
-            // 📤 ENVÍO DEL FORMULARIO OPTIMIZADO
+            // 📤 ENVÍO DEL FORMULARIO OPTIMIZADO Y CORREGIDO
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
@@ -1157,19 +1158,20 @@
                 hideMessages();
 
                 try {
-                    // 📋 PREPARAR DATOS OPTIMIZADOS
+                    // 📋 PREPARAR DATOS CORREGIDOS - COINCIDEN CON GOOGLE SHEETS
                     const formDataObj = {
                         timestamp: new Date().toISOString(),
                         source: 'github-pages',
-                        version: '4.0',
+                        version: '4.1-corregido',
+                        // 🔧 CAMPOS CORREGIDOS SEGÚN COLUMNAS DEL SHEETS
                         tipoCliente: document.getElementById('tipoCliente').value,
                         nombreCliente: document.getElementById('nombreCliente').value,
                         dniCif: document.getElementById('dniCif').value,
-                        representanteNombre: document.getElementById('representanteNombre').value,
-                        representanteDni: document.getElementById('representanteDni').value,
                         email: document.getElementById('email').value,
                         telefono: document.getElementById('telefono').value,
                         direccion: document.getElementById('direccion').value,
+                        municipio: document.getElementById('municipio').value,
+                        codigoPostal: document.getElementById('codigoPostal').value, // ✅ CORREGIDO
                         discapacidad: document.querySelector('input[name="discapacidad"]:checked').value,
                         tipoAdquisicion: document.getElementById('tipoAdquisicion').value,
                         marcaModelo: document.getElementById('marcaModelo').value,
@@ -1184,6 +1186,9 @@
                         matriculaAchatarrrar: document.getElementById('matriculaAchatarrrar').value,
                         fechaItvAchatarrrar: document.getElementById('fechaItvAchatarrrar').value,
                         fechaPagoIvtm: document.getElementById('fechaPagoIvtm').value,
+                        // 🔧 REPRESENTANTE AGREGADO
+                        representanteNombre: document.getElementById('representanteNombre').value,
+                        representanteDni: document.getElementById('representanteDni').value,
                         // Metadatos adicionales
                         userAgent: navigator.userAgent,
                         screenResolution: `${screen.width}x${screen.height}`,
@@ -1282,7 +1287,7 @@
             updateProgress();
             toggleConditionalFields();
 
-            console.log('✅ Sistema MOVES III v4.0 iniciado desde GitHub Pages');
+            console.log('✅ Sistema MOVES III v4.1 - Versión Corregida iniciado desde GitHub Pages');
         });
     </script>
 </body>
