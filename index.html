@@ -3,54 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sistema automatizado para solicitudes del programa MOVES III - Innonea Lab">
-    <meta name="keywords" content="MOVES III, formulario, automatización, vehículos eléctricos">
-    <meta name="author" content="Innonea Lab">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Formulario MOVES III - Sistema Automatizado">
-    <meta property="og:description" content="Procesamiento automático de solicitudes MOVES III con generación de documentos">
-    <meta property="og:url" content="https://tu-usuario.github.io/sistema-moves-iii/">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Formulario MOVES III - Sistema Automatizado">
-    <meta property="twitter:description" content="Procesamiento automático de solicitudes MOVES III">
-    
-    <title>📋 Formulario MOVES III - Sistema Automatizado | Innonea Lab</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
-    
-    <!-- Preconnect para optimización -->
-    <link rel="preconnect" href="https://script.google.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>📋 Formulario MOVES III - Versión Debug</title>
     
     <style>
-        /* 🎨 ESTILOS OPTIMIZADOS PARA GITHUB PAGES */
         :root {
             --primary-color: #667eea;
             --secondary-color: #764ba2;
             --success-color: #28a745;
             --warning-color: #ffc107;
             --danger-color: #dc3545;
-            --info-color: #17a2b8;
-            --dark-color: #1e3c72;
-            --light-color: #f8f9fa;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --debug-color: #ff6b35;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             min-height: 100vh;
             padding: 20px;
@@ -64,151 +32,77 @@
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
-            position: relative;
         }
 
-        /* 🌟 Header mejorado */
         .header {
-            background: linear-gradient(135deg, var(--dark-color) 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             padding: 40px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 30px 30px;
-            animation: headerPattern 20s linear infinite;
-        }
+        .header h1 { font-size: 2.8em; margin-bottom: 10px; font-weight: 700; }
+        .header p { font-size: 1.2em; opacity: 0.95; margin-bottom: 20px; }
 
-        @keyframes headerPattern {
-            0% { transform: rotate(0deg) translate(-50%, -50%); }
-            100% { transform: rotate(360deg) translate(-50%, -50%); }
-        }
+        .form-content { padding: 40px; }
 
-        .header h1 {
-            font-size: 2.8em;
-            margin-bottom: 10px;
-            font-weight: 700;
-            position: relative;
-            z-index: 2;
-        }
-
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.95;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .company-info {
-            background: rgba(255,255,255,0.15);
+        .debug-panel {
+            background: linear-gradient(145deg, #fff3cd, #ffeaa7);
+            border: 2px solid var(--debug-color);
+            border-radius: 8px;
             padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            position: relative;
-            z-index: 2;
+            margin: 20px 0;
+            color: #856404;
         }
 
-        .company-info h3 {
-            color: #ffd700;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-        }
-
-        /* 🔄 Indicador de estado en tiempo real */
-        .status-indicator {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--success-color);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 3;
-        }
-
-        .status-indicator::before {
-            content: '●';
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .form-content {
-            padding: 40px;
+        .debug-info {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
         }
 
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             border: 1px solid #e9ecef;
-            border-radius: var(--border-radius);
+            border-radius: 8px;
             padding: 25px;
-            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            background: #ffffff;
         }
 
         .section-title {
             font-size: 1.6em;
-            color: var(--dark-color);
+            color: #1e3c72;
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 3px solid var(--primary-color);
-            display: flex;
-            align-items: center;
-            position: relative;
         }
 
-        .section-title::before {
-            content: "📋";
-            margin-right: 12px;
-            font-size: 1.2em;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
+        .form-group { margin-bottom: 20px; }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
             color: #333;
-            font-size: 1em;
         }
 
-        .required {
-            color: var(--danger-color);
-        }
+        .required { color: var(--danger-color); }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border: 2px solid #e0e0e0;
-            border-radius: var(--border-radius);
+            border-radius: 6px;
             font-size: 16px;
-            transition: var(--transition);
-            background: white;
+            transition: all 0.3s ease;
         }
 
         .form-group input:focus,
@@ -217,12 +111,16 @@
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-1px);
+        }
+
+        .debug-highlight {
+            border: 3px solid var(--debug-color) !important;
+            background: #fff8f0 !important;
         }
 
         .radio-group {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             margin-top: 10px;
             flex-wrap: wrap;
         }
@@ -231,12 +129,12 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border: 2px solid #e0e0e0;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
+            border-radius: 6px;
             cursor: pointer;
             background: white;
+            transition: all 0.3s ease;
         }
 
         .radio-option:hover {
@@ -244,15 +142,34 @@
             background: #f8f9ff;
         }
 
-        .radio-option input[type="radio"] {
-            width: auto;
-            margin: 0;
+        .radio-option input[type="radio"] { width: auto; margin: 0; }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
         }
 
-        .radio-option input[type="radio"]:checked + label {
-            color: var(--primary-color);
-            font-weight: 600;
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
         }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #submitFrame { display: none; }
 
         .help-text {
             font-size: 0.9em;
@@ -261,432 +178,66 @@
             font-style: italic;
         }
 
-        /* 📋 Cajas de información mejoradas */
-        .info-box {
-            padding: 20px;
-            border-radius: var(--border-radius);
-            margin-bottom: 25px;
-            border-left: 4px solid;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .info-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, currentColor, transparent);
-        }
-
-        .warning-box {
-            background: linear-gradient(145deg, #fff3cd, #ffeaa7);
-            border-left-color: var(--warning-color);
-            color: #856404;
-        }
-
-        .payment-info {
-            background: linear-gradient(145deg, #e8f5e8, #d4edda);
-            border-left-color: var(--success-color);
-            color: #155724;
-        }
-
-        .payment-info .account {
-            font-family: 'Courier New', monospace;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #155724;
-            background: white;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin-top: 15px;
-            border: 2px dashed var(--success-color);
-            text-align: center;
-            letter-spacing: 1px;
-        }
-
-        .conditional-field {
-            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
-            border: 1px solid #dee2e6;
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-top: 15px;
-            display: none;
-            transition: var(--transition);
-        }
-
-        .conditional-field.active {
-            display: block;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* 📎 Área de subida de archivos mejorada */
-        .file-upload-area {
-            border: 3px dashed var(--primary-color);
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            background: linear-gradient(145deg, #f8f9ff, #e8ebff);
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .file-upload-area::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            border-radius: 15px;
-            z-index: -1;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .file-upload-area:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--box-shadow);
-        }
-
-        .file-upload-area:hover::before {
-            opacity: 1;
-        }
-
-        .file-upload-area.dragover {
-            background: linear-gradient(145deg, #e8ebff, #d1d9ff);
-            border-color: var(--secondary-color);
-            transform: scale(1.02);
-        }
-
-        .upload-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-
-        .file-list {
-            margin-top: 20px;
-        }
-
-        .file-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            margin-bottom: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: var(--transition);
-        }
-
-        .file-item:hover {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            transform: translateY(-1px);
-        }
-
-        .file-item .file-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .file-item .remove-file {
-            color: var(--danger-color);
-            cursor: pointer;
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 50%;
-            transition: var(--transition);
-        }
-
-        .file-item .remove-file:hover {
-            background: var(--danger-color);
-            color: white;
-        }
-
-        /* 🚀 Sección de envío mejorada */
-        .submit-section {
-            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
-            padding: 40px;
-            border-radius: 20px;
-            margin-top: 40px;
-            text-align: center;
-            border: 1px solid #dee2e6;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        .debug-button {
+            background: var(--debug-color);
             color: white;
             border: none;
-            padding: 18px 50px;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 4px;
+            margin: 5px;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-            position: relative;
-            overflow: hidden;
+            font-size: 0.9em;
         }
 
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+        .debug-button:hover {
+            background: #e55a2b;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
-        }
-
-        .submit-btn:hover::before {
-            left: 100%;
-        }
-
-        .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .submit-btn:disabled::before {
-            display: none;
-        }
-
-        /* 📊 Barra de progreso mejorada */
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: #e0e0e0;
-            border-radius: 3px;
-            overflow: hidden;
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            width: 0%;
-            transition: width 0.4s ease;
-            position: relative;
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: progressShimmer 2s infinite;
-        }
-
-        @keyframes progressShimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        /* 💬 Mensajes de estado */
-        .message {
-            padding: 20px;
-            border-radius: var(--border-radius);
-            margin-bottom: 25px;
-            display: none;
-            text-align: center;
-            font-weight: 500;
-            animation: messageSlide 0.5s ease-out;
-        }
-
-        @keyframes messageSlide {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .success-message {
-            background: linear-gradient(145deg, #d4edda, #c3e6cb);
-            border: 1px solid #c3e6cb;
-            color: #155724;
-        }
-
-        .error-message {
-            background: linear-gradient(145deg, #f8d7da, #f5c6cb);
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-        }
-
-        /* 🔧 Iframe oculto */
-        #submitFrame {
-            display: none;
-        }
-
-        /* 📱 Responsive Design */
         @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 15px;
-            }
-
-            .header {
-                padding: 30px 20px;
-            }
-
-            .header h1 {
-                font-size: 2.2em;
-            }
-
-            .form-content {
-                padding: 30px 20px;
-            }
-
-            .radio-group {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .file-upload-area {
-                padding: 30px 20px;
-            }
-
-            .submit-btn {
-                padding: 16px 40px;
-                font-size: 1.1em;
-            }
-        }
-
-        /* 🎨 Efectos adicionales */
-        .section:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
-        }
-
-        .form-group input:valid {
-            border-color: var(--success-color);
-        }
-
-        .form-group input:invalid:not(:placeholder-shown) {
-            border-color: var(--danger-color);
-        }
-
-        /* ⏰ Loading spinner */
-        .loading-spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ffffff;
-            border-top: 2px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-left: 10px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .submit-btn.loading .loading-spinner {
-            display: inline-block;
+            .container { margin: 10px; }
+            .form-content { padding: 20px; }
+            .radio-group { flex-direction: column; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 🌟 Status Indicator -->
-        <div class="status-indicator" id="statusIndicator">
-            Sistema Operativo
-        </div>
-
         <div class="header">
             <h1>📋 Formulario MOVES III</h1>
-            <p>Sistema automatizado de procesamiento de documentos</p>
-            
-            <div class="company-info">
-                <h3>🚀 Innonea Lab - Soluciones de Automatización</h3>
-                <p><small>🌐 Gestión Valladolid - Gestoría administrativa</small></p>
-            </div>
+            <p>Versión Debug - Solución Municipio y Código Postal</p>
         </div>
 
         <div class="form-content">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
+            <!-- PANEL DE DEBUG AVANZADO -->
+            <div class="debug-panel">
+                <h3>🔧 Panel de Debug Avanzado</h3>
+                <p>Monitoreo en tiempo real de municipio y código postal</p>
+                <div>
+                    <button type="button" class="debug-button" onclick="mostrarEstadoFormulario()">📊 Estado Actual</button>
+                    <button type="button" class="debug-button" onclick="limpiarDebug()">🧹 Limpiar</button>
+                    <button type="button" class="debug-button" onclick="simularEnvio()">🧪 Simular Envío</button>
+                </div>
+                <div id="debugInfo" class="debug-info">🔍 Debug iniciado - Versión 4.2-FIXED\n</div>
             </div>
 
-            <div class="success-message message" id="successMessage">
-                ✅ <strong>Formulario enviado correctamente</strong><br>
-                Sus documentos serán procesados automáticamente y recibirá una confirmación por email.
-            </div>
-
-            <div class="error-message message" id="errorMessage">
-                ❌ <strong>Error al enviar el formulario</strong><br>
-                <span id="errorDetails">Por favor, revise los datos e intente nuevamente.</span>
-            </div>
-
-            <div class="info-box warning-box">
-                <h4>📎 Documentación requerida para subir:</h4>
-                <ul>
-                    <li>✅ DNI/CIF</li>
-                    <li>✅ Certificado de empadronamiento</li>
-                    <li>✅ Certificado de cuenta bancaria</li>
-                    <li>✅ Solo AUTÓNOMOS: Certificado de alta en el Censo de empresarios (AEAT)</li>
-                    <li>✅ Solo DISCAPACIDAD: Certificado de discapacidad</li>
-                </ul>
-            </div>
-
-            <div class="info-box payment-info">
-                <h4>💳 Honorarios de tramitación: 133,10€ (IVA incluido)</h4>
-                <p>Ingresar en la cuenta de <strong>Gestión Valladolid JMG SL</strong></p>
-                <p>Concepto: Nombre y apellidos del solicitante</p>
-                <div class="account">ES44 0049 5450 0328 1627 1901</div>
-            </div>
-
-            <!-- 🔧 FORMULARIO OPTIMIZADO Y CORREGIDO -->
-            <form id="movesForm" action="https://script.google.com/macros/s/AKfycbxu5ezLMbLqd59HdyT79D7aFGeEsa1zqQFDEj1q1B7vTLNUBpRA40MHYmF_aq64uHlwAg/exec" method="POST" enctype="multipart/form-data" target="submitFrame">
+            <!-- FORMULARIO OPTIMIZADO -->
+            <form id="movesForm" 
+                  action="https://script.google.com/macros/s/AKfycbxu5ezLMbLqd59HdyT79D7aFGeEsa1zqQFDEj1q1B7vTLNUBpRA40MHYmF_aq64uHlwAg/exec" 
+                  method="POST" 
+                  enctype="multipart/form-data" 
+                  target="submitFrame">
                 
-                <!-- DATOS OCULTOS PARA EL FORMULARIO -->
+                <!-- Campos ocultos -->
                 <input type="hidden" id="formDataJSON" name="data" value="">
-                <input type="hidden" name="source" value="github-pages">
-                <input type="hidden" name="version" value="4.1-corregido">
+                <input type="hidden" name="source" value="html-debug-fixed">
+                <input type="hidden" name="version" value="4.2-fixed">
                 
-                <!-- SECCIÓN 1: DATOS BÁSICOS -->
+                <!-- SECCIÓN: DATOS BÁSICOS -->
                 <div class="section">
                     <h2 class="section-title">Datos Básicos del Solicitante</h2>
                     
                     <div class="form-group">
-                        <label for="tipoCliente">Particular / Empresa / Autónomo <span class="required">*</span></label>
+                        <label for="tipoCliente">Tipo de Cliente <span class="required">*</span></label>
                         <select id="tipoCliente" name="tipoCliente" required>
                             <option value="">Seleccionar...</option>
                             <option value="Particular">Particular</option>
@@ -696,77 +247,101 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="nombreCliente">Nombre y apellidos / Razón social <span class="required">*</span></label>
-                        <input type="text" id="nombreCliente" name="nombreCliente" required placeholder="Ej: Juan Pérez García / Transportes ABC SL">
+                        <label for="nombreCliente">Nombre / Razón Social <span class="required">*</span></label>
+                        <input type="text" id="nombreCliente" name="nombreCliente" required 
+                               placeholder="Ej: Juan Pérez García" 
+                               onchange="debugCampo('nombreCliente', this.value)">
                     </div>
 
                     <div class="form-group">
                         <label for="dniCif">DNI / CIF <span class="required">*</span></label>
-                        <input type="text" id="dniCif" name="dniCif" required placeholder="Ej: 12345678A / B47123456" maxlength="9">
+                        <input type="text" id="dniCif" name="dniCif" required 
+                               placeholder="12345678A" maxlength="9"
+                               onchange="debugCampo('dniCif', this.value)">
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Correo electrónico <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" required placeholder="ejemplo@email.com">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required 
+                               placeholder="ejemplo@email.com"
+                               onchange="debugCampo('email', this.value)">
                     </div>
 
                     <div class="form-group">
-                        <label for="telefono">Teléfono de contacto <span class="required">*</span></label>
-                        <input type="tel" id="telefono" name="telefono" required placeholder="600123456">
+                        <label for="telefono">Teléfono <span class="required">*</span></label>
+                        <input type="tel" id="telefono" name="telefono" required 
+                               placeholder="600123456"
+                               onchange="debugCampo('telefono', this.value)">
                     </div>
 
                     <div class="form-group">
-                        <label for="direccion">Dirección del solicitante <span class="required">*</span></label>
-                        <textarea id="direccion" name="direccion" required placeholder="Calle, número, piso" rows="3"></textarea>
+                        <label for="direccion">Dirección <span class="required">*</span></label>
+                        <textarea id="direccion" name="direccion" required 
+                                  placeholder="Calle, número, piso" rows="2"
+                                  onchange="debugCampo('direccion', this.value)"></textarea>
+                    </div>
+
+                    <!-- 🔥 CAMPOS CRÍTICOS CON DEBUG ESPECIAL -->
+                    <div class="form-group">
+                        <label for="municipio" style="color: var(--debug-color); font-size: 16px; font-weight: bold;">
+                            🔍 MUNICIPIO (Campo Crítico) <span class="required">*</span>
+                        </label>
+                        <input type="text" 
+                               id="municipio" 
+                               name="municipio" 
+                               required 
+                               placeholder="Valladolid" 
+                               class="debug-highlight"
+                               onchange="debugCampoEspecial('municipio', 'change', this.value)"
+                               onblur="debugCampoEspecial('municipio', 'blur', this.value)"
+                               oninput="debugCampoEspecial('municipio', 'input', this.value)"
+                               onfocus="debugCampoEspecial('municipio', 'focus', this.value)">
+                        <div class="help-text" style="color: var(--debug-color); font-weight: bold;">
+                            🚨 Campo bajo monitoreo intensivo - Cada cambio se registra
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="municipio">Municipio <span class="required">*</span></label>
-                        <input type="text" id="municipio" name="municipio" required placeholder="Valladolid">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="codigoPostal">Código postal <span class="required">*</span></label>
-                        <input type="text" id="codigoPostal" name="codigoPostal" required placeholder="47001" maxlength="5">
+                        <label for="codigoPostal" style="color: var(--debug-color); font-size: 16px; font-weight: bold;">
+                            🔍 CÓDIGO POSTAL (Campo Crítico) <span class="required">*</span>
+                        </label>
+                        <input type="text" 
+                               id="codigoPostal" 
+                               name="codigoPostal" 
+                               required 
+                               placeholder="47001" 
+                               maxlength="5"
+                               class="debug-highlight"
+                               onchange="debugCampoEspecial('codigoPostal', 'change', this.value)"
+                               onblur="debugCampoEspecial('codigoPostal', 'blur', this.value)"
+                               oninput="debugCampoEspecial('codigoPostal', 'input', this.value)"
+                               onfocus="debugCampoEspecial('codigoPostal', 'focus', this.value)">
+                        <div class="help-text" style="color: var(--debug-color); font-weight: bold;">
+                            🚨 Campo bajo monitoreo intensivo - Cada cambio se registra
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label>Discapacidad <span class="required">*</span></label>
                         <div class="radio-group">
                             <div class="radio-option">
+                                <input type="radio" id="discapacidadNo" name="discapacidad" value="No" required checked>
+                                <label for="discapacidadNo">No</label>
+                            </div>
+                            <div class="radio-option">
                                 <input type="radio" id="discapacidadSi" name="discapacidad" value="Sí" required>
                                 <label for="discapacidadSi">Sí</label>
                             </div>
-                            <div class="radio-option">
-                                <input type="radio" id="discapacidadNo" name="discapacidad" value="No" required>
-                                <label for="discapacidadNo">No</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 🔧 SECCIÓN REPRESENTANTE CORREGIDA - POSICIONADA AQUÍ -->
-                    <div class="conditional-field" id="representanteFields">
-                        <h4>👤 Datos del Representante (Solo empresas)</h4>
-                        <div class="form-group">
-                            <label for="representanteNombre">Representante - Nombre y apellidos</label>
-                            <input type="text" id="representanteNombre" name="representanteNombre" placeholder="Solo para empresas">
-                            <div class="help-text">CUMPLIMENTAR SOLO SI SOLICITA EMPRESA</div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="representanteDni">Representante - DNI</label>
-                            <input type="text" id="representanteDni" name="representanteDni" placeholder="12345678A" maxlength="9">
-                            <div class="help-text">CUMPLIMENTAR SOLO SI SOLICITA EMPRESA</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- SECCIÓN 2: DATOS DEL VEHÍCULO -->
+                <!-- SECCIÓN: VEHÍCULO (CAMPOS ESENCIALES) -->
                 <div class="section">
                     <h2 class="section-title">Datos del Vehículo</h2>
                     
                     <div class="form-group">
-                        <label for="tipoAdquisicion">Tipo de adquisición del vehículo <span class="required">*</span></label>
+                        <label for="tipoAdquisicion">Tipo de Adquisición <span class="required">*</span></label>
                         <select id="tipoAdquisicion" name="tipoAdquisicion" required>
                             <option value="">Seleccionar...</option>
                             <option value="Compra">Compra</option>
@@ -776,8 +351,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="marcaModelo">Marca y modelo <span class="required">*</span></label>
-                        <input type="text" id="marcaModelo" name="marcaModelo" required placeholder="Ej: Tesla Model 3, Nissan Leaf, BMW i3">
+                        <label for="marcaModelo">Marca y Modelo <span class="required">*</span></label>
+                        <input type="text" id="marcaModelo" name="marcaModelo" required placeholder="Tesla Model 3">
                     </div>
 
                     <div class="form-group">
@@ -790,21 +365,21 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="costeVehiculo">Coste total del vehículo (sin IVA) <span class="required">*</span></label>
-                        <input type="number" id="costeVehiculo" name="costeVehiculo" step="0.01" required placeholder="42000" min="0">
-                        <div class="help-text">Solo la base imponible, sin incluir el IVA</div>
+                        <label for="costeVehiculo">Coste del Vehículo <span class="required">*</span></label>
+                        <input type="number" id="costeVehiculo" name="costeVehiculo" required placeholder="45000" min="0">
                     </div>
 
+                    <!-- Campos radio simplificados para prueba -->
                     <div class="form-group">
-                        <label>Adquiere vehículo demostración <span class="required">*</span></label>
+                        <label>Vehículo Demostración <span class="required">*</span></label>
                         <div class="radio-group">
                             <div class="radio-option">
-                                <input type="radio" id="demostracionSi" name="vehiculoDemostracion" value="Sí" required>
-                                <label for="demostracionSi">Sí</label>
+                                <input type="radio" id="demoNo" name="vehiculoDemostracion" value="No" required checked>
+                                <label for="demoNo">No</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="demostracionNo" name="vehiculoDemostracion" value="No" required>
-                                <label for="demostracionNo">No</label>
+                                <input type="radio" id="demoSi" name="vehiculoDemostracion" value="Sí" required>
+                                <label for="demoSi">Sí</label>
                             </div>
                         </div>
                     </div>
@@ -813,467 +388,280 @@
                         <label>Taxi o VTC <span class="required">*</span></label>
                         <div class="radio-group">
                             <div class="radio-option">
-                                <input type="radio" id="taxiSi" name="taxiVtc" value="Sí" required>
-                                <label for="taxiSi">Sí</label>
+                                <input type="radio" id="taxiNo" name="taxiVtc" value="No" required checked>
+                                <label for="taxiNo">No</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="taxiNo" name="taxiVtc" value="No" required>
-                                <label for="taxiNo">No</label>
+                                <input type="radio" id="taxiSi" name="taxiVtc" value="Sí" required>
+                                <label for="taxiSi">Sí</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Vehículo seminuevo <span class="required">*</span></label>
+                        <label>Vehículo Seminuevo <span class="required">*</span></label>
                         <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="seminuevoNo" name="vehiculoSeminuevo" value="No" required checked>
+                                <label for="seminuevoNo">No</label>
+                            </div>
                             <div class="radio-option">
                                 <input type="radio" id="seminuevoSi" name="vehiculoSeminuevo" value="Sí" required>
                                 <label for="seminuevoSi">Sí</label>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Otras Ayudas <span class="required">*</span></label>
+                        <div class="radio-group">
                             <div class="radio-option">
-                                <input type="radio" id="seminuevoNo" name="vehiculoSeminuevo" value="No" required>
-                                <label for="seminuevoNo">No</label>
+                                <input type="radio" id="ayudasNo" name="otrasAyudas" value="No" required checked>
+                                <label for="ayudasNo">No</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="ayudasSi" name="otrasAyudas" value="Sí" required>
+                                <label for="ayudasSi">Sí</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>¿Ha solicitado otras ayudas para la adquisición de este vehículo? <span class="required">*</span></label>
+                        <label>Se Achatarra Vehículo <span class="required">*</span></label>
                         <div class="radio-group">
                             <div class="radio-option">
-                                <input type="radio" id="otrasAyudasSi" name="otrasAyudas" value="Sí" required>
-                                <label for="otrasAyudasSi">Sí</label>
+                                <input type="radio" id="achatarrraNo" name="seAchatarrra" value="No" required checked>
+                                <label for="achatarrraNo">No</label>
                             </div>
-                            <div class="radio-option">
-                                <input type="radio" id="otrasAyudasNo" name="otrasAyudas" value="No" required>
-                                <label for="otrasAyudasNo">No</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECCIÓN 3: ACHATARRAMIENTO -->
-                <div class="section">
-                    <h2 class="section-title">Achatarramiento</h2>
-                    
-                    <div class="form-group">
-                        <label>Se achatarra vehículo <span class="required">*</span></label>
-                        <div class="radio-group">
                             <div class="radio-option">
                                 <input type="radio" id="achatarraSi" name="seAchatarrra" value="Sí" required>
                                 <label for="achatarraSi">Sí</label>
                             </div>
-                            <div class="radio-option">
-                                <input type="radio" id="achatarrraNo" name="seAchatarrra" value="No" required>
-                                <label for="achatarrraNo">No</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="conditional-field" id="achatarrramientoFields">
-                        <div class="form-group">
-                            <label for="marcaModeloAchatarrrar">Marca y el modelo vehículo a achatarrar</label>
-                            <input type="text" id="marcaModeloAchatarrrar" name="marcaModeloAchatarrrar" placeholder="Ej: Ford Focus, Seat Ibiza">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="matriculaAchatarrrar">Matrícula del vehículo a achatarrar</label>
-                            <input type="text" id="matriculaAchatarrrar" name="matriculaAchatarrrar" placeholder="1234ABC" maxlength="8">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="fechaItvAchatarrrar">Detallar la fecha ITV del vehículo a achatarrar</label>
-                            <input type="text" id="fechaItvAchatarrrar" name="fechaItvAchatarrrar" placeholder="DD/MM/YYYY">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="fechaPagoIvtm">Detallar la fecha de pago del último IVTM</label>
-                            <input type="date" id="fechaPagoIvtm" name="fechaPagoIvtm">
                         </div>
                     </div>
                 </div>
 
-                <!-- SECCIÓN 4: DOCUMENTOS -->
-                <div class="section">
-                    <h2 class="section-title">Subir Documentación</h2>
-                    
-                    <div class="form-group">
-                        <label for="archivos">Documentos requeridos <span class="required">*</span></label>
-                        <div class="file-upload-area" id="fileUploadArea">
-                            <div class="upload-icon">📎</div>
-                            <p><strong>Haga clic aquí o arrastre archivos</strong></p>
-                            <p>Suba todos los documentos requeridos (PDF, JPG, PNG)</p>
-                            <p><small>Máximo 25MB por archivo</small></p>
-                            <input type="file" id="archivos" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display: none;">
-                        </div>
-                        <div class="file-list" id="fileList"></div>
-                        
-                        <!-- 🔧 CONTENEDOR PARA INPUTS INDIVIDUALES -->
-                        <div id="hiddenFileInputs"></div>
-                    </div>
-                </div>
+                <!-- Campos ocultos para completar estructura -->
+                <input type="hidden" name="marcaModeloAchatarrrar" value="">
+                <input type="hidden" name="matriculaAchatarrrar" value="">
+                <input type="hidden" name="fechaItvAchatarrrar" value="">
+                <input type="hidden" name="fechaPagoIvtm" value="">
+                <input type="hidden" name="representanteNombre" value="">
+                <input type="hidden" name="representanteDni" value="">
 
-                <div class="submit-section">
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        🚀 Procesar Solicitud MOVES III
-                        <span class="loading-spinner"></span>
-                    </button>
-                    <div class="help-text">Al enviar acepta los términos del programa MOVES III y el procesamiento de sus datos</div>
+                <!-- BOTÓN DE ENVÍO -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    🔍 Enviar Formulario Debug (Sin Archivos)
+                </button>
+                <div class="help-text" style="text-align: center; margin-top: 10px;">
+                    Esta versión omite archivos para concentrarse en el problema de municipio y código postal
                 </div>
             </form>
 
-            <!-- 🔧 IFRAME OCULTO PARA RECIBIR RESPUESTA -->
             <iframe name="submitFrame" id="submitFrame"></iframe>
         </div>
     </div>
 
-    <!-- 🔧 JavaScript optimizado y corregido -->
     <script>
+        // ========================================
+        // 🔍 SISTEMA DE DEBUG JAVASCRIPT AVANZADO
+        // ========================================
+
+        let debugData = {
+            municipio: '',
+            codigoPostal: '',
+            ultimoEvento: '',
+            contadorCambios: 0
+        };
+
+        function debugLog(mensaje) {
+            const debugInfo = document.getElementById('debugInfo');
+            const timestamp = new Date().toLocaleTimeString();
+            debugInfo.textContent += `[${timestamp}] ${mensaje}\n`;
+            debugInfo.scrollTop = debugInfo.scrollHeight;
+            console.log(`🔍 DEBUG: ${mensaje}`);
+        }
+
+        function debugCampo(campo, valor) {
+            debugLog(`${campo}: "${valor}"`);
+        }
+
+        function debugCampoEspecial(campo, evento, valor) {
+            debugData.contadorCambios++;
+            debugData.ultimoEvento = `${campo}-${evento}`;
+            
+            if (campo === 'municipio') {
+                debugData.municipio = valor;
+            } else if (campo === 'codigoPostal') {
+                debugData.codigoPostal = valor;
+            }
+            
+            debugLog(`🔥 ${campo.toUpperCase()} ${evento}: "${valor}" (length: ${valor.length})`);
+            debugLog(`   → Cambios totales: ${debugData.contadorCambios}`);
+        }
+
+        function limpiarDebug() {
+            document.getElementById('debugInfo').textContent = '🔍 Debug limpiado - Versión 4.2-FIXED\n';
+            debugData.contadorCambios = 0;
+        }
+
+        function mostrarEstadoFormulario() {
+            const municipio = document.getElementById('municipio').value;
+            const codigoPostal = document.getElementById('codigoPostal').value;
+            const nombreCliente = document.getElementById('nombreCliente').value;
+            
+            debugLog('📊 ===== ESTADO ACTUAL DEL FORMULARIO =====');
+            debugLog(`   🔥 municipio DOM: "${municipio}" (${municipio.length} chars)`);
+            debugLog(`   🔥 codigoPostal DOM: "${codigoPostal}" (${codigoPostal.length} chars)`);
+            debugLog(`   📋 nombreCliente DOM: "${nombreCliente}"`);
+            debugLog(`   📈 debugData.municipio: "${debugData.municipio}"`);
+            debugLog(`   📈 debugData.codigoPostal: "${debugData.codigoPostal}"`);
+            debugLog(`   🎯 Último evento: ${debugData.ultimoEvento}`);
+            debugLog(`   📊 Total cambios: ${debugData.contadorCambios}`);
+        }
+
+        function simularEnvio() {
+            debugLog('🧪 ===== SIMULACIÓN DE ENVÍO =====');
+            
+            const municipio = document.getElementById('municipio').value;
+            const codigoPostal = document.getElementById('codigoPostal').value;
+            
+            if (!municipio || !codigoPostal) {
+                debugLog('❌ FALTAN DATOS: Por favor llena municipio y código postal');
+                return;
+            }
+            
+            const datosSimulados = {
+                municipio: municipio,
+                codigoPostal: codigoPostal,
+                nombreCliente: document.getElementById('nombreCliente').value || 'Test Simulado'
+            };
+            
+            debugLog(`🧪 Datos que se enviarían:`);
+            debugLog(`   municipio: "${datosSimulados.municipio}"`);
+            debugLog(`   codigoPostal: "${datosSimulados.codigoPostal}"`);
+            debugLog(`   nombreCliente: "${datosSimulados.nombreCliente}"`);
+            debugLog(`🧪 JSON simulado: ${JSON.stringify(datosSimulados)}`);
+        }
+
+        // ========================================
+        // 🚀 MANEJO DE ENVÍO DEL FORMULARIO
+        // ========================================
+
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('movesForm');
-            const progressFill = document.getElementById('progressFill');
             const submitBtn = document.getElementById('submitBtn');
-            const successMessage = document.getElementById('successMessage');
-            const errorMessage = document.getElementById('errorMessage');
-            const fileInput = document.getElementById('archivos');
-            const fileUploadArea = document.getElementById('fileUploadArea');
-            const fileList = document.getElementById('fileList');
-            const hiddenFileInputs = document.getElementById('hiddenFileInputs');
-            const statusIndicator = document.getElementById('statusIndicator');
 
-            let selectedFiles = [];
+            debugLog('✅ Formulario Debug v4.2-FIXED inicializado');
+            debugLog('🎯 Enfoque: Solución problema municipio y código postal');
 
-            // 🔍 VERIFICAR CONEXIÓN CON GOOGLE APPS SCRIPT
-            function checkSystemStatus() {
-                const formAction = form.getAttribute('action');
-                if (formAction.includes('script.google.com')) {
-                    statusIndicator.textContent = 'Sistema Operativo';
-                    statusIndicator.style.background = 'var(--success-color)';
-                } else {
-                    statusIndicator.textContent = 'Configuración Pendiente';
-                    statusIndicator.style.background = 'var(--warning-color)';
-                }
-            }
-
-            // 📊 ACTUALIZAR BARRA DE PROGRESO
-            function updateProgress() {
-                const requiredInputs = form.querySelectorAll('input[required], select[required]');
-                const totalFields = requiredInputs.length;
-                let completedFields = 0;
-
-                requiredInputs.forEach(field => {
-                    if (field.type === 'radio') {
-                        if (form.querySelector(`input[name="${field.name}"]:checked`)) {
-                            completedFields++;
-                        }
-                    } else if (field.value.trim() !== '') {
-                        completedFields++;
-                    }
-                });
-
-                // Bonus por archivos
-                if (selectedFiles.length > 0) {
-                    completedFields += 2;
-                }
-
-                const progress = Math.min((completedFields / totalFields) * 100, 100);
-                progressFill.style.width = progress + '%';
-
-                // Cambiar color según progreso
-                if (progress < 30) {
-                    progressFill.style.background = 'linear-gradient(90deg, #dc3545, #ff6b7a)';
-                } else if (progress < 70) {
-                    progressFill.style.background = 'linear-gradient(90deg, #ffc107, #ffda44)';
-                } else {
-                    progressFill.style.background = 'linear-gradient(90deg, var(--primary-color), var(--secondary-color))';
-                }
-            }
-
-            // 🔄 CAMPOS CONDICIONALES CON ANIMACIÓN
-            function toggleConditionalFields() {
-                const tipoCliente = document.getElementById('tipoCliente').value;
-                const seAchatarrra = document.querySelector('input[name="seAchatarrra"]:checked')?.value;
-                
-                // Representante solo para empresas
-                const representanteFields = document.getElementById('representanteFields');
-                if (tipoCliente === 'Empresa') {
-                    representanteFields.classList.add('active');
-                } else {
-                    representanteFields.classList.remove('active');
-                }
-
-                // Achatarramiento solo si se selecciona
-                const achatarrramientoFields = document.getElementById('achatarrramientoFields');
-                if (seAchatarrra === 'Sí') {
-                    achatarrramientoFields.classList.add('active');
-                } else {
-                    achatarrramientoFields.classList.remove('active');
-                }
-            }
-
-            // 📎 MANEJO AVANZADO DE ARCHIVOS
-            fileUploadArea.addEventListener('click', () => fileInput.click());
-            
-            fileUploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                fileUploadArea.classList.add('dragover');
-            });
-
-            fileUploadArea.addEventListener('dragleave', () => {
-                fileUploadArea.classList.remove('dragover');
-            });
-
-            fileUploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                fileUploadArea.classList.remove('dragover');
-                handleFiles(e.dataTransfer.files);
-            });
-
-            fileInput.addEventListener('change', (e) => {
-                handleFiles(e.target.files);
-            });
-
-            function handleFiles(files) {
-                Array.from(files).forEach(file => {
-                    // Validaciones
-                    if (file.size > 25 * 1024 * 1024) { // 25MB
-                        showError(`El archivo ${file.name} es muy grande. Máximo 25MB.`);
-                        return;
-                    }
-
-                    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/gif', 
-                                        'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-                    if (!allowedTypes.includes(file.type)) {
-                        showError(`Tipo de archivo no permitido: ${file.name}`);
-                        return;
-                    }
-                    
-                    selectedFiles.push(file);
-                    displayFile(file);
-                    createHiddenFileInput(file, selectedFiles.length - 1);
-                });
-                updateProgress();
-            }
-
-            // 🔧 CREAR INPUT FILE INDIVIDUAL (OPTIMIZADO)
-            function createHiddenFileInput(file, index) {
-                const hiddenInput = document.createElement('input');
-                hiddenInput.type = 'file';
-                hiddenInput.name = `file_${index}`;
-                hiddenInput.style.display = 'none';
-                hiddenInput.id = `hiddenFile_${index}`;
-                hiddenFileInputs.appendChild(hiddenInput);
-
-                // Asignar archivo usando DataTransfer
-                const dt = new DataTransfer();
-                dt.items.add(file);
-                hiddenInput.files = dt.files;
-            }
-
-            function displayFile(file) {
-                const fileItem = document.createElement('div');
-                fileItem.className = 'file-item';
-                fileItem.innerHTML = `
-                    <div class="file-info">
-                        <span>${getFileIcon(file.type)}</span>
-                        <span><strong>${file.name}</strong></span>
-                        <span><small>(${formatFileSize(file.size)})</small></span>
-                    </div>
-                    <span class="remove-file" onclick="removeFile('${file.name}')" title="Eliminar archivo">❌</span>
-                `;
-                fileList.appendChild(fileItem);
-            }
-
-            function getFileIcon(type) {
-                if (type.includes('pdf')) return '📄';
-                if (type.includes('image')) return '🖼️';
-                if (type.includes('word') || type.includes('document')) return '📝';
-                return '📎';
-            }
-
-            window.removeFile = function(fileName) {
-                const fileIndex = selectedFiles.findIndex(file => file.name === fileName);
-                if (fileIndex > -1) {
-                    selectedFiles.splice(fileIndex, 1);
-                    
-                    // Remover input oculto
-                    const hiddenInput = document.getElementById(`hiddenFile_${fileIndex}`);
-                    if (hiddenInput) {
-                        hiddenInput.remove();
-                    }
-                    
-                    // Remover de la lista visual
-                    const fileItems = fileList.querySelectorAll('.file-item');
-                    fileItems.forEach(item => {
-                        if (item.textContent.includes(fileName)) {
-                            item.remove();
-                        }
-                    });
-                    
-                    // Recrear inputs ocultos con índices correctos
-                    hiddenFileInputs.innerHTML = '';
-                    selectedFiles.forEach((file, index) => {
-                        createHiddenFileInput(file, index);
-                    });
-                }
-                updateProgress();
-            }
-
-            function formatFileSize(bytes) {
-                if (bytes === 0) return '0 Bytes';
-                const k = 1024;
-                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-                const i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-            }
-
-            // 🎯 EVENT LISTENERS
-            form.addEventListener('input', updateProgress);
-            form.addEventListener('change', function(e) {
-                updateProgress();
-                toggleConditionalFields();
-            });
-
-            // 📤 ENVÍO DEL FORMULARIO OPTIMIZADO Y CORREGIDO
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                console.log('🚀 Iniciando envío del formulario...');
+                debugLog('🚀 ===== INICIANDO ENVÍO REAL =====');
                 
-                // Validaciones
                 if (!form.checkValidity()) {
+                    debugLog('❌ Formulario no válido');
                     form.reportValidity();
                     return;
                 }
 
-                if (selectedFiles.length === 0) {
-                    showError('Debe subir al menos un documento.');
+                // Capturar valores directamente del DOM
+                const municipioValor = document.getElementById('municipio').value;
+                const codigoPostalValor = document.getElementById('codigoPostal').value;
+                
+                debugLog('📋 CAPTURA DIRECTA DESDE DOM:');
+                debugLog(`   municipio: "${municipioValor}" (${municipioValor.length} chars)`);
+                debugLog(`   codigoPostal: "${codigoPostalValor}" (${codigoPostalValor.length} chars)`);
+
+                // Verificar que no estén vacíos
+                if (!municipioValor || !codigoPostalValor) {
+                    debugLog('🚨 ERROR: Municipio o código postal vacíos');
+                    alert('🚨 Por favor llena municipio y código postal');
                     return;
                 }
 
-                // UI de loading
-                submitBtn.disabled = true;
-                submitBtn.classList.add('loading');
-                submitBtn.innerHTML = '⏳ Procesando... <span class="loading-spinner"></span>';
-                hideMessages();
+                // Preparar objeto de datos
+                const formDataObj = {
+                    timestamp: new Date().toISOString(),
+                    source: 'html-debug-fixed',
+                    version: '4.2-fixed',
+                    tipoCliente: document.getElementById('tipoCliente').value,
+                    nombreCliente: document.getElementById('nombreCliente').value,
+                    dniCif: document.getElementById('dniCif').value,
+                    email: document.getElementById('email').value,
+                    telefono: document.getElementById('telefono').value,
+                    direccion: document.getElementById('direccion').value,
+                    // 🔥 CAMPOS CRÍTICOS
+                    municipio: municipioValor,
+                    codigoPostal: codigoPostalValor,
+                    discapacidad: document.querySelector('input[name="discapacidad"]:checked').value,
+                    tipoAdquisicion: document.getElementById('tipoAdquisicion').value,
+                    marcaModelo: document.getElementById('marcaModelo').value,
+                    motorizacion: document.getElementById('motorizacion').value,
+                    costeVehiculo: document.getElementById('costeVehiculo').value,
+                    vehiculoDemostracion: document.querySelector('input[name="vehiculoDemostracion"]:checked').value,
+                    taxiVtc: document.querySelector('input[name="taxiVtc"]:checked').value,
+                    vehiculoSeminuevo: document.querySelector('input[name="vehiculoSeminuevo"]:checked').value,
+                    otrasAyudas: document.querySelector('input[name="otrasAyudas"]:checked').value,
+                    seAchatarrra: document.querySelector('input[name="seAchatarrra"]:checked').value,
+                    marcaModeloAchatarrrar: '',
+                    matriculaAchatarrrar: '',
+                    fechaItvAchatarrrar: '',
+                    fechaPagoIvtm: '',
+                    representanteNombre: '',
+                    representanteDni: ''
+                };
 
-                try {
-                    // 📋 PREPARAR DATOS CORREGIDOS - COINCIDEN CON GOOGLE SHEETS
-                    const formDataObj = {
-                        timestamp: new Date().toISOString(),
-                        source: 'github-pages',
-                        version: '4.1-corregido',
-                        // 🔧 CAMPOS CORREGIDOS SEGÚN COLUMNAS DEL SHEETS
-                        tipoCliente: document.getElementById('tipoCliente').value,
-                        nombreCliente: document.getElementById('nombreCliente').value,
-                        dniCif: document.getElementById('dniCif').value,
-                        email: document.getElementById('email').value,
-                        telefono: document.getElementById('telefono').value,
-                        direccion: document.getElementById('direccion').value,
-                        municipio: document.getElementById('municipio').value,
-                        codigoPostal: document.getElementById('codigoPostal').value, // ✅ CORREGIDO
-                        discapacidad: document.querySelector('input[name="discapacidad"]:checked').value,
-                        tipoAdquisicion: document.getElementById('tipoAdquisicion').value,
-                        marcaModelo: document.getElementById('marcaModelo').value,
-                        motorizacion: document.getElementById('motorizacion').value,
-                        costeVehiculo: document.getElementById('costeVehiculo').value,
-                        vehiculoDemostracion: document.querySelector('input[name="vehiculoDemostracion"]:checked').value,
-                        taxiVtc: document.querySelector('input[name="taxiVtc"]:checked').value,
-                        vehiculoSeminuevo: document.querySelector('input[name="vehiculoSeminuevo"]:checked').value,
-                        otrasAyudas: document.querySelector('input[name="otrasAyudas"]:checked').value,
-                        seAchatarrra: document.querySelector('input[name="seAchatarrra"]:checked').value,
-                        marcaModeloAchatarrrar: document.getElementById('marcaModeloAchatarrrar').value,
-                        matriculaAchatarrrar: document.getElementById('matriculaAchatarrrar').value,
-                        fechaItvAchatarrrar: document.getElementById('fechaItvAchatarrrar').value,
-                        fechaPagoIvtm: document.getElementById('fechaPagoIvtm').value,
-                        // 🔧 REPRESENTANTE AGREGADO
-                        representanteNombre: document.getElementById('representanteNombre').value,
-                        representanteDni: document.getElementById('representanteDni').value,
-                        // Metadatos adicionales
-                        userAgent: navigator.userAgent,
-                        screenResolution: `${screen.width}x${screen.height}`,
-                        numArchivos: selectedFiles.length
-                    };
+                debugLog('📋 OBJETO FINAL PREPARADO:');
+                debugLog(`   🔥 formDataObj.municipio: "${formDataObj.municipio}"`);
+                debugLog(`   🔥 formDataObj.codigoPostal: "${formDataObj.codigoPostal}"`);
+                debugLog(`   📋 formDataObj.nombreCliente: "${formDataObj.nombreCliente}"`);
 
-                    // Agregar datos como JSON al campo oculto
-                    document.getElementById('formDataJSON').value = JSON.stringify(formDataObj);
+                // Agregar JSON al campo oculto
+                document.getElementById('formDataJSON').value = JSON.stringify(formDataObj);
+                
+                debugLog('📤 JSON FINAL PARA APPS SCRIPT:');
+                debugLog(JSON.stringify(formDataObj, null, 2));
 
-                    console.log('📋 Datos preparados:', formDataObj);
-                    console.log('📎 Archivos preparados:', selectedFiles.length);
-
-                    // 🔧 CONFIGURAR CALLBACK PARA IFRAME
-                    window.submitCallback = function(success = true, message = '') {
-                        console.log('📞 Callback recibido:', { success, message });
-                        
-                        if (success) {
-                            showSuccess();
-                            resetForm();
-                        } else {
-                            showError(message || 'Error procesando la solicitud');
-                        }
-                        
-                        // Restaurar botón
-                        submitBtn.disabled = false;
-                        submitBtn.classList.remove('loading');
-                        submitBtn.innerHTML = '🚀 Procesar Solicitud MOVES III';
-                    };
-
-                    // 🚀 ENVIAR FORMULARIO
-                    console.log('📤 Enviando formulario...');
-                    form.submit();
-
-                    // ⏰ TIMEOUT DE SEGURIDAD
-                    setTimeout(() => {
-                        if (submitBtn.disabled) {
-                            console.log('⏰ Timeout de seguridad activado');
-                            window.submitCallback(true, 'Formulario enviado (timeout)');
-                        }
-                    }, 15000); // 15 segundos
-
-                } catch (error) {
-                    console.error('❌ Error en envío:', error);
-                    showError('Error inesperado. Verifique los datos e intente nuevamente.');
+                // Configurar callback
+                window.submitCallback = function(success, message) {
+                    debugLog(`📞 ===== RESPUESTA RECIBIDA =====`);
+                    debugLog(`   success: ${success}`);
+                    debugLog(`   message: "${message}"`);
                     
-                    // Restaurar botón
                     submitBtn.disabled = false;
-                    submitBtn.classList.remove('loading');
-                    submitBtn.innerHTML = '🚀 Procesar Solicitud MOVES III';
-                }
+                    submitBtn.textContent = '🔍 Enviar Formulario Debug (Sin Archivos)';
+                    
+                    if (success) {
+                        debugLog('✅ ¡FORMULARIO ENVIADO EXITOSAMENTE!');
+                        debugLog('🔍 Revisa el Google Sheets en las columnas H (municipio) e I (código postal)');
+                        alert('✅ Formulario enviado exitosamente!\n\nRevisa:\n- Google Sheets columnas H e I\n- Logs del Apps Script\n- Panel de debug');
+                    } else {
+                        debugLog(`❌ Error en envío: ${message}`);
+                        alert(`❌ Error: ${message}\n\nRevisa los logs del Apps Script`);
+                    }
+                };
+
+                // Cambiar estado del botón
+                submitBtn.disabled = true;
+                submitBtn.textContent = '⏳ Enviando datos...';
+
+                debugLog('🚀 ENVIANDO AL APPS SCRIPT...');
+                form.submit();
+
+                // Timeout de seguridad
+                setTimeout(() => {
+                    if (submitBtn.disabled) {
+                        debugLog('⏰ Timeout de seguridad activado (15s)');
+                        window.submitCallback(true, 'Enviado con timeout - revisar manualmente');
+                    }
+                }, 15000);
             });
 
-            function resetForm() {
-                form.reset();
-                selectedFiles = [];
-                fileList.innerHTML = '';
-                hiddenFileInputs.innerHTML = '';
-                updateProgress();
-                toggleConditionalFields();
-            }
-
-            function showSuccess() {
-                successMessage.style.display = 'block';
-                successMessage.scrollIntoView({ behavior: 'smooth' });
-                
-                // Confetti effect (simple)
-                setTimeout(() => {
-                    successMessage.style.animation = 'messageSlide 0.5s ease-out';
-                }, 100);
-            }
-
-            function showError(message) {
-                document.getElementById('errorDetails').textContent = message;
-                errorMessage.style.display = 'block';
-                errorMessage.scrollIntoView({ behavior: 'smooth' });
-            }
-
-            function hideMessages() {
-                successMessage.style.display = 'none';
-                errorMessage.style.display = 'none';
-            }
-
-            // 🔧 CALLBACK DESDE IFRAME
+            // Listener para respuestas del iframe
             window.addEventListener('message', function(event) {
-                console.log('📩 Mensaje recibido:', event.data);
+                debugLog(`📩 Mensaje iframe recibido: ${JSON.stringify(event.data)}`);
                 
                 if (event.data && event.data.type === 'formSubmitted') {
                     if (window.submitCallback) {
@@ -1282,12 +670,21 @@
                 }
             });
 
-            // 🚀 INICIALIZACIÓN
-            checkSystemStatus();
-            updateProgress();
-            toggleConditionalFields();
+            // Pre-llenar campos para prueba rápida
+            document.getElementById('nombreCliente').value = 'Test Debug Municipio';
+            document.getElementById('dniCif').value = '12345678A';
+            document.getElementById('email').value = 'test@debug.com';
+            document.getElementById('telefono').value = '600123456';
+            document.getElementById('direccion').value = 'Calle Test Debug';
+            document.getElementById('municipio').value = 'Valladolid';
+            document.getElementById('codigoPostal').value = '47001';
+            document.getElementById('tipoAdquisicion').value = 'Compra';
+            document.getElementById('marcaModelo').value = 'Tesla Model 3 Debug';
+            document.getElementById('motorizacion').value = 'Eléctrico';
+            document.getElementById('costeVehiculo').value = '45000';
 
-            console.log('✅ Sistema MOVES III v4.1 - Versión Corregida iniciado desde GitHub Pages');
+            debugLog('🎯 Formulario pre-llenado para prueba rápida');
+            debugLog('📋 Usa "📊 Estado Actual" para ver valores o modifica los campos críticos');
         });
     </script>
 </body>
