@@ -710,6 +710,12 @@
                 <button type="submit" class="submit-btn" id="submitBtn">
                     🚀 Enviar Solicitud MOVES III
                 </button>
+                
+                <!-- BOTÓN DE PRUEBA TEMPORAL -->
+                <button type="button" onclick="mostrarMensajeExito()" 
+                        style="background: #17a2b8; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 10px; cursor: pointer;">
+                    🧪 Probar Mensaje de Éxito
+                </button>
 
                 <div class="help-text" style="text-align: center; margin-top: 15px;">
                     Al enviar acepta el tratamiento de sus datos según nuestra política de privacidad
@@ -967,6 +973,14 @@
 
             updateProgress();
         });
+
+        // 🧪 FUNCIÓN DE PRUEBA TEMPORAL
+        function mostrarMensajeExito() {
+            console.log('🧪 Mostrando mensaje de éxito de prueba');
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('movesForm').style.display = 'none';
+            window.scrollTo(0, 0);
+        }
 
         // ========================================
         // 🔄 FUNCIONES DE VISIBILIDAD CONDICIONAL
