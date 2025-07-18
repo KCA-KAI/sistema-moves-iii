@@ -198,57 +198,6 @@
             margin: 0; 
         }
 
-        .file-upload {
-            border: 3px dashed #e0e0e0;
-            border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-            background: #fafafa;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .file-upload:hover {
-            border-color: var(--primary-color);
-            background: #f8f9ff;
-        }
-
-        .file-upload.dragover {
-            border-color: var(--success-color);
-            background: #f0fff4;
-        }
-
-        .file-list {
-            margin-top: 15px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .file-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .file-item:last-child {
-            border-bottom: none;
-        }
-
-        .file-remove {
-            background: var(--danger-color);
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8em;
-        }
-
         .conditional-section {
             margin-top: 20px;
             padding: 20px;
@@ -670,6 +619,47 @@
                     </div>
                 </div>
 
+                <!-- SECCIÓN 6: HONORARIOS DE TRAMITACIÓN -->
+                <div class="section">
+                    <h2 class="section-title">
+                        💳 Honorarios de Tramitación
+                    </h2>
+                    <p class="section-subtitle">Información de pago por los servicios de gestión</p>
+                    
+                    <div class="info-box" style="background: linear-gradient(135deg, #fff3cd, #ffeaa7); border-left: 4px solid #ffc107;">
+                        <h4 style="color: #856404; margin-bottom: 15px; font-size: 1.3em;">
+                            💰 Honorarios de tramitación: <strong>133,10€, IVA incluido</strong>
+                        </h4>
+                        
+                        <div style="background: rgba(255,255,255,0.7); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                            <h5 style="color: #856404; margin-bottom: 15px; font-size: 1.1em;">
+                                🏦 Datos para la transferencia bancaria:
+                            </h5>
+                            
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; border: 2px solid #dee2e6;">
+                                <p style="margin: 5px 0; color: #333; font-weight: 600;">
+                                    <strong>Beneficiario:</strong> Gestión Valladolid JMG SL
+                                </p>
+                                <p style="margin: 5px 0; color: #333; font-family: 'Courier New', monospace; font-size: 1.1em; font-weight: bold;">
+                                    <strong>IBAN:</strong> ES44 0049 5450 0328 1627 1901
+                                </p>
+                                <p style="margin: 5px 0; color: #333; font-weight: 600;">
+                                    <strong>Concepto:</strong> <span id="conceptoPago">Indique su nombre y apellidos</span>
+                                </p>
+                                <p style="margin: 5px 0; color: #333; font-weight: 600;">
+                                    <strong>Importe:</strong> 133,10€
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="warning-box" style="margin-top: 15px;">
+                            <p style="margin: 0; color: #856404; font-weight: 600;">
+                                ⚠️ <strong>Importante:</strong> El pago de los honorarios es necesario para iniciar la tramitación de su solicitud MOVES III.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- BOTÓN DE ENVÍO -->
                 <button type="submit" class="submit-btn" id="submitBtn">
                     🚀 Enviar Solicitud MOVES III
@@ -687,16 +677,21 @@
                 <ul style="text-align: left; margin: 15px 0; padding-left: 20px;">
                     <li>Todos los documentos generados automáticamente</li>
                     <li><strong>Lista específica de documentos que debe enviar según su tipo de cliente</strong></li>
+                    <li><strong>Datos bancarios para el pago de honorarios (133,10€)</strong></li>
                     <li>Instrucciones detalladas para completar su solicitud</li>
                 </ul>
                 <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
                     <p style="margin: 0; font-weight: 600; font-size: 1.1em;">
-                        📧 Revise su correo electrónico para ver los documentos específicos que debe enviar
+                        📧 Revise su correo electrónico para ver:
                     </p>
+                    <ul style="text-align: left; margin: 10px 0; padding-left: 20px;">
+                        <li>Documentos específicos que debe enviar</li>
+                        <li>Información completa de pago de honorarios</li>
+                    </ul>
                 </div>
                 <div style="margin-top: 15px;">
                     <p style="font-size: 0.9em; opacity: 0.9;">
-                        Nuestro equipo revisará su solicitud y se pondrá en contacto con usted una vez reciba la documentación requerida.
+                        Nuestro equipo revisará su solicitud una vez reciba la documentación requerida y confirme el pago de honorarios.
                     </p>
                 </div>
             </div>
@@ -717,10 +712,23 @@
 
             // Actualizar barra de progreso
             function updateProgress() {
-                const totalSections = 5; // Ahora son 5 secciones sin archivos
+                const totalSections = 6; // Ahora son 6 secciones incluyendo honorarios
                 const completedSections = document.querySelectorAll('.section').length;
                 const progress = Math.min(100, (completedSections / totalSections) * 100);
                 progressFill.style.width = progress + '%';
+            }
+
+            // Actualizar concepto de pago cuando cambie el nombre
+            const nombreClienteInput = document.getElementById('nombreCliente');
+            if (nombreClienteInput) {
+                nombreClienteInput.addEventListener('input', function() {
+                    const conceptoPago = document.getElementById('conceptoPago');
+                    if (conceptoPago && this.value.trim()) {
+                        conceptoPago.textContent = this.value.trim();
+                    } else if (conceptoPago) {
+                        conceptoPago.textContent = 'Indique su nombre y apellidos';
+                    }
+                });
             }
 
             // 🚀 ENVÍO DEL FORMULARIO - SISTEMA SIMPLIFICADO
@@ -736,7 +744,7 @@
                 const formDataObj = {
                     timestamp: new Date().toISOString(),
                     source: 'html-production-final',
-                    version: '4.2-production-no-files',
+                    version: '4.2-production-honorarios',
                     tipoCliente: document.getElementById('tipoCliente').value,
                     nombreCliente: document.getElementById('nombreCliente').value,
                     dniCif: document.getElementById('dniCif').value,
