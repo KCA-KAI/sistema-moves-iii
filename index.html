@@ -670,85 +670,33 @@
                     </div>
                 </div>
 
-                <!-- SECCIÓN 6: DOCUMENTACIÓN -->
-                <div class="section">
-                    <h2 class="section-title">
-                        📎 Documentación Adjunta
-                    </h2>
-                    <p class="section-subtitle">Adjunte los documentos necesarios para su solicitud</p>
-
-                    <div class="form-group">
-                        <label for="archivos">Archivos Adjuntos</label>
-                        <div class="file-upload" onclick="document.getElementById('archivos').click()">
-                            <div style="font-size: 2em; margin-bottom: 10px;">📎</div>
-                            <p style="font-size: 1.1em; font-weight: 600;">Haga clic aquí para seleccionar archivos</p>
-                            <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
-                                o arrastre y suelte los archivos aquí
-                            </p>
-                            <input type="file" id="archivos" name="archivos" multiple 
-                                   style="display: none;" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
-                        </div>
-                        <div class="help-text">
-                            Formatos admitidos: PDF, JPG, PNG, DOC, DOCX. Tamaño máximo por archivo: 25MB
-                        </div>
-                        <div id="fileList" class="file-list" style="display: none;"></div>
-                    </div>
-
-                    <div class="info-box">
-                        <h4>📋 Documentos típicamente necesarios:</h4>
-                        <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li>DNI/CIF del solicitante</li>
-                            <li>Justificante de domicilio</li>
-                            <li>Factura proforma o presupuesto del vehículo</li>
-                            <li>Ficha técnica del vehículo</li>
-                            <li>Si achatarrra: documentación del vehículo a achatarrar</li>
-                        </ul>
-                    </div>
-                </div>
-
                 <!-- BOTÓN DE ENVÍO -->
                 <button type="submit" class="submit-btn" id="submitBtn">
                     🚀 Enviar Solicitud MOVES III
                 </button>
 
                 <div class="help-text" style="text-align: center; margin-top: 15px;">
-                    Al enviar acepta el tratamiento de sus datos según nuestra política de privacidad
+                    Al enviar acepta el tratamiento de sus datos según nuestra política de privacidad<br>
+                    <strong>Los documentos específicos se solicitarán por email según su tipo de cliente</strong>
                 </div>
             </form>
 
             <div class="success-message" id="successMessage">
                 <h3>✅ ¡Solicitud Enviada Correctamente!</h3>
-                <p>Su solicitud MOVES III ha sido procesada. Recibirá un email de confirmación con todos los documentos generados automáticamente.</p>
-                <div style="margin-top: 20px;">
-                    <h4 style="margin-bottom: 15px; color: #fff; font-size: 1.2em;">📋 Próximos pasos:</h4>
-                    
-                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 10px;">
-                        <h5 style="margin-bottom: 10px; color: #fff;">1. PERSONAS FÍSICAS: ENVIAR DNI/NIE Y:</h5>
-                        <ul style="margin-left: 20px; line-height: 1.6;">
-                            <li>CERTIFICADO DE EMPADRONAMIENTO SI RESIDE EN MUNICIPIO DE MENOS DE 5.000 HABITANTES</li>
-                            <li>CERTIFICADO DE DISCAPACIDAD SI USTED TIENE ALGUNA DISCAPACIDAD DECLARADA</li>
-                        </ul>
-                    </div>
-                    
-                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 10px;">
-                        <h5 style="margin-bottom: 10px; color: #fff;">2. PERSONAS JURÍDICAS: ENVIAR</h5>
-                        <ul style="margin-left: 20px; line-height: 1.6;">
-                            <li>CIF</li>
-                            <li>DNI/NIE DEL REPRESENTANTE</li>
-                            <li>CERTIFICADO CENSAL</li>
-                        </ul>
-                    </div>
-                    
-                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                        <h5 style="margin-bottom: 10px; color: #fff;">3. AUTÓNOMOS: ENVIAR</h5>
-                        <ul style="margin-left: 20px; line-height: 1.6;">
-                            <li>DNI/NIE</li>
-                            <li>CERTIFICADO CENSAL</li>
-                        </ul>
-                    </div>
-                    
-                    <p style="margin-top: 20px; font-weight: 600; font-size: 1.1em;">
-                        Nuestro equipo revisará su solicitud y se pondrá en contacto con usted.
+                <p>Su solicitud MOVES III ha sido procesada automáticamente. Recibirá un email de confirmación con:</p>
+                <ul style="text-align: left; margin: 15px 0; padding-left: 20px;">
+                    <li>Todos los documentos generados automáticamente</li>
+                    <li><strong>Lista específica de documentos que debe enviar según su tipo de cliente</strong></li>
+                    <li>Instrucciones detalladas para completar su solicitud</li>
+                </ul>
+                <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                    <p style="margin: 0; font-weight: 600; font-size: 1.1em;">
+                        📧 Revise su correo electrónico para ver los documentos específicos que debe enviar
+                    </p>
+                </div>
+                <div style="margin-top: 15px;">
+                    <p style="font-size: 0.9em; opacity: 0.9;">
+                        Nuestro equipo revisará su solicitud y se pondrá en contacto con usted una vez reciba la documentación requerida.
                     </p>
                 </div>
             </div>
@@ -762,8 +710,6 @@
         // 🚀 SISTEMA DE FORMULARIO PRODUCCIÓN
         // ========================================
 
-        let selectedFiles = [];
-
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('movesForm');
             const submitBtn = document.getElementById('submitBtn');
@@ -771,77 +717,13 @@
 
             // Actualizar barra de progreso
             function updateProgress() {
-                const totalSections = 6;
+                const totalSections = 5; // Ahora son 5 secciones sin archivos
                 const completedSections = document.querySelectorAll('.section').length;
                 const progress = Math.min(100, (completedSections / totalSections) * 100);
                 progressFill.style.width = progress + '%';
             }
 
-            // Gestión de archivos
-            const fileInput = document.getElementById('archivos');
-            const fileUpload = document.querySelector('.file-upload');
-            const fileList = document.getElementById('fileList');
-
-            fileInput.addEventListener('change', handleFiles);
-
-            // Drag and drop
-            fileUpload.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                fileUpload.classList.add('dragover');
-            });
-
-            fileUpload.addEventListener('dragleave', () => {
-                fileUpload.classList.remove('dragover');
-            });
-
-            fileUpload.addEventListener('drop', (e) => {
-                e.preventDefault();
-                fileUpload.classList.remove('dragover');
-                const files = Array.from(e.dataTransfer.files);
-                addFiles(files);
-            });
-
-            function handleFiles(e) {
-                const files = Array.from(e.target.files);
-                addFiles(files);
-            }
-
-            function addFiles(files) {
-                files.forEach(file => {
-                    if (file.size > 25 * 1024 * 1024) {
-                        alert(`El archivo ${file.name} es demasiado grande (máximo 25MB)`);
-                        return;
-                    }
-                    
-                    if (!selectedFiles.find(f => f.name === file.name && f.size === file.size)) {
-                        selectedFiles.push(file);
-                    }
-                });
-                
-                updateFileList();
-            }
-
-            function updateFileList() {
-                if (selectedFiles.length === 0) {
-                    fileList.style.display = 'none';
-                    return;
-                }
-
-                fileList.style.display = 'block';
-                fileList.innerHTML = selectedFiles.map((file, index) => `
-                    <div class="file-item">
-                        <span>📄 ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
-                        <button type="button" class="file-remove" onclick="removeFile(${index})">Eliminar</button>
-                    </div>
-                `).join('');
-            }
-
-            window.removeFile = function(index) {
-                selectedFiles.splice(index, 1);
-                updateFileList();
-            };
-
-            // 🚀 ENVÍO DEL FORMULARIO - SISTEMA MEJORADO
+            // 🚀 ENVÍO DEL FORMULARIO - SISTEMA SIMPLIFICADO
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
@@ -854,7 +736,7 @@
                 const formDataObj = {
                     timestamp: new Date().toISOString(),
                     source: 'html-production-final',
-                    version: '4.2-production-final',
+                    version: '4.2-production-no-files',
                     tipoCliente: document.getElementById('tipoCliente').value,
                     nombreCliente: document.getElementById('nombreCliente').value,
                     dniCif: document.getElementById('dniCif').value,
@@ -879,7 +761,7 @@
                     fechaPagoIvtm: document.getElementById('fechaPagoIvtm').value || '',
                     representanteNombre: document.getElementById('representanteNombre').value || '',
                     representanteDni: document.getElementById('representanteDni').value || '',
-                    archivosCount: selectedFiles.length
+                    archivosCount: 0 // Sin archivos
                 };
 
                 // Actualizar campo JSON
