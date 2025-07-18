@@ -355,9 +355,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚗 Programa MOVES III</h1>
-            <p>Solicitud de incentivos para fomentar la movilidad eficiente y sostenible</p>
-            <div class="badge">Gestión Valladolid - Gestoría administrativa</div>
+            <h1>🚗 Plan MOVES III</h1>
+            <p>Solicitud de Incentivos para Vehículos Eléctricos</p>
+            <div class="badge">Gestión Valladolid</div>
         </div>
 
         <div class="form-content">
@@ -683,7 +683,7 @@
                             <div style="font-size: 2em; margin-bottom: 10px;">📎</div>
                             <p style="font-size: 1.1em; font-weight: 600;">Haga clic aquí para seleccionar archivos</p>
                             <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
-                                o arrastre y suelte los archivos aquí
+                                Seleccione múltiples archivos a la vez
                             </p>
                             <input type="file" id="archivos" name="archivos" multiple 
                                    style="display: none;" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
@@ -695,11 +695,13 @@
                     </div>
 
                     <div class="info-box">
-                        <h4>📋 Honorarios de tramitación: 133,10€, IVA incluido. Datos para efectuar el ingreso:</h4>
+                        <h4>📋 Documentos típicamente necesarios:</h4>
                         <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li>Beneficiario: Gestión Valladolid JMG, S.L.</li>
-                            <li>Concepto: Nombre y apellidos del solicitante</li>
-                            <li>IBAN: ES44 0049 5450 0328 1627 1901 </li>
+                            <li>DNI/CIF del solicitante</li>
+                            <li>Justificante de domicilio</li>
+                            <li>Factura proforma o presupuesto del vehículo</li>
+                            <li>Ficha técnica del vehículo</li>
+                            <li>Si achatarrra: documentación del vehículo a achatarrar</li>
                         </ul>
                     </div>
                 </div>
@@ -717,9 +719,38 @@
             <div class="success-message" id="successMessage">
                 <h3>✅ ¡Solicitud Enviada Correctamente!</h3>
                 <p>Su solicitud MOVES III ha sido procesada. Recibirá un email de confirmación con todos los documentos generados automáticamente.</p>
-                <p style="margin-top: 15px;">
-                    <strong>Próximos pasos:</strong> Nuestro equipo revisará su solicitud y se pondrá en contacto con usted.
-                </p>
+                <div style="margin-top: 20px;">
+                    <h4 style="margin-bottom: 15px; color: #fff; font-size: 1.2em;">📋 Próximos pasos:</h4>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                        <h5 style="margin-bottom: 10px; color: #fff;">1. PERSONAS FÍSICAS: ENVIAR DNI/NIE Y:</h5>
+                        <ul style="margin-left: 20px; line-height: 1.6;">
+                            <li>CERTIFICADO DE EMPADRONAMIENTO SI RESIDE EN MUNICIPIO DE MENOS DE 5.000 HABITANTES</li>
+                            <li>CERTIFICADO DE DISCAPACIDAD SI USTED TIENE ALGUNA DISCAPACIDAD DECLARADA</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                        <h5 style="margin-bottom: 10px; color: #fff;">2. PERSONAS JURÍDICAS: ENVIAR</h5>
+                        <ul style="margin-left: 20px; line-height: 1.6;">
+                            <li>CIF</li>
+                            <li>DNI/NIE DEL REPRESENTANTE</li>
+                            <li>CERTIFICADO CENSAL</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <h5 style="margin-bottom: 10px; color: #fff;">3. AUTÓNOMOS: ENVIAR</h5>
+                        <ul style="margin-left: 20px; line-height: 1.6;">
+                            <li>DNI/NIE</li>
+                            <li>CERTIFICADO CENSAL</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="margin-top: 20px; font-weight: 600; font-size: 1.1em;">
+                        Nuestro equipo revisará su solicitud y se pondrá en contacto con usted.
+                    </p>
+                </div>
             </div>
 
             <iframe name="submitFrame" id="submitFrame"></iframe>
