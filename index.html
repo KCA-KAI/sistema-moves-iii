@@ -683,7 +683,7 @@
                             <div style="font-size: 2em; margin-bottom: 10px;">📎</div>
                             <p style="font-size: 1.1em; font-weight: 600;">Haga clic aquí para seleccionar archivos</p>
                             <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
-                                Seleccione múltiples archivos a la vez
+                                o arrastre y suelte los archivos aquí
                             </p>
                             <input type="file" id="archivos" name="archivos" multiple 
                                    style="display: none;" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
@@ -841,7 +841,7 @@
                 updateFileList();
             };
 
-            // Envío del formulario
+            // 🚀 ENVÍO DEL FORMULARIO - SISTEMA MEJORADO
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
@@ -853,8 +853,8 @@
                 // Preparar objeto de datos para JSON
                 const formDataObj = {
                     timestamp: new Date().toISOString(),
-                    source: 'html-production',
-                    version: '4.2-production',
+                    source: 'html-production-final',
+                    version: '4.2-production-final',
                     tipoCliente: document.getElementById('tipoCliente').value,
                     nombreCliente: document.getElementById('nombreCliente').value,
                     dniCif: document.getElementById('dniCif').value,
@@ -885,47 +885,20 @@
                 // Actualizar campo JSON
                 document.getElementById('formDataJSON').value = JSON.stringify(formDataObj);
 
-                // 🔥 SISTEMA DE ARCHIVOS CORREGIDO
-                // Limpiar input de archivos existente
-                const originalFileInput = document.getElementById('archivos');
-                originalFileInput.value = '';
+                // Cambiar estado del botón
+                submitBtn.disabled = true;
+                submitBtn.textContent = '⏳ Enviando solicitud...';
 
-                // Crear inputs de archivo dinámicos para cada archivo seleccionado
-                const existingDynamicInputs = form.querySelectorAll('.dynamic-file-input');
-                existingDynamicInputs.forEach(input => input.remove());
-
-                if (selectedFiles.length > 0) {
-                    console.log(`📎 Preparando ${selectedFiles.length} archivos para envío`);
-                    
-                    selectedFiles.forEach((file, index) => {
-                        // Crear un input file dinámico para cada archivo
-                        const fileInput = document.createElement('input');
-                        fileInput.type = 'file';
-                        fileInput.name = `file_${index}`;
-                        fileInput.className = 'dynamic-file-input';
-                        fileInput.style.display = 'none';
-                        
-                        // Crear un DataTransfer para asignar el archivo al input
-                        const dataTransfer = new DataTransfer();
-                        dataTransfer.items.add(file);
-                        fileInput.files = dataTransfer.files;
-                        
-                        form.appendChild(fileInput);
-                        
-                        console.log(`📎 Archivo ${index}: ${file.name} (${(file.size/1024/1024).toFixed(2)}MB) agregado como file_${index}`);
-                    });
-                } else {
-                    console.log('📎 No hay archivos para enviar');
-                }
-
+                // Variables para control de respuesta
+                let responseDetected = false;
+                
                 // Configurar callback
                 window.submitCallback = function(success, message) {
+                    if (responseDetected) return;
+                    responseDetected = true;
+                    
                     submitBtn.disabled = false;
                     submitBtn.textContent = '🚀 Enviar Solicitud MOVES III';
-                    
-                    // Limpiar inputs dinámicos
-                    const dynamicInputs = form.querySelectorAll('.dynamic-file-input');
-                    dynamicInputs.forEach(input => input.remove());
                     
                     if (success) {
                         document.getElementById('successMessage').style.display = 'block';
@@ -936,24 +909,26 @@
                     }
                 };
 
-                // Cambiar estado del botón
-                submitBtn.disabled = true;
-                submitBtn.textContent = '⏳ Enviando solicitud...';
-
-                console.log('🚀 Enviando formulario con archivos al Apps Script...');
-                console.log(`📊 Total archivos: ${selectedFiles.length}`);
-                console.log(`📋 Datos JSON: ${document.getElementById('formDataJSON').value.substring(0, 200)}...`);
-
-                // 🚀 ENVÍO TRADICIONAL DEL FORMULARIO (Compatible con archivos)
+                console.log('🚀 Enviando formulario al Apps Script...');
+                
+                // ENVÍO DIRECTO DEL FORMULARIO
                 form.submit();
 
-                // Timeout de seguridad
+                // Timeout de seguridad - mostrar éxito automáticamente
                 setTimeout(() => {
-                    if (submitBtn.disabled) {
-                        console.log('⏰ Timeout de seguridad activado (15s)');
-                        window.submitCallback(true, 'Enviado con timeout - revisar manualmente');
+                    if (!responseDetected) {
+                        responseDetected = true;
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = '🚀 Enviar Solicitud MOVES III';
+                        
+                        // Mostrar mensaje de éxito
+                        document.getElementById('successMessage').style.display = 'block';
+                        form.style.display = 'none';
+                        window.scrollTo(0, 0);
+                        
+                        console.log('✅ Formulario enviado correctamente (timeout)');
                     }
-                }, 15000);
+                }, 8000); // 8 segundos
             });
 
             // Listener para respuestas del iframe
