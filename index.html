@@ -290,6 +290,38 @@
             border-radius: 6px;
         }
 
+        /* Estilo específico para campo IBAN */
+        .iban-input {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .iban-valid {
+            border-color: var(--success-color) !important;
+            background: #f8fff8 !important;
+        }
+
+        .iban-invalid {
+            border-color: var(--danger-color) !important;
+            background: #fff8f8 !important;
+        }
+
+        .validation-message {
+            margin-top: 5px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .validation-success {
+            color: var(--success-color);
+        }
+
+        .validation-error {
+            color: var(--danger-color);
+        }
+
         @media (max-width: 768px) {
             .container { margin: 10px; }
             .form-content { padding: 30px 20px; }
@@ -328,7 +360,7 @@
                 <!-- Campos ocultos -->
                 <input type="hidden" id="formDataJSON" name="data" value="">
                 <input type="hidden" name="source" value="html-production">
-                <input type="hidden" name="version" value="4.2-production">
+                <input type="hidden" name="version" value="4.3-production-iban">
                 
                 <!-- SECCIÓN 1: DATOS DEL SOLICITANTE -->
                 <div class="section">
@@ -541,7 +573,60 @@
                     </div>
                 </div>
 
-                <!-- SECCIÓN 4: AYUDAS Y SUBVENCIONES -->
+                <!-- SECCIÓN 4: DATOS BANCARIOS PARA COBRO DE SUBVENCIÓN -->
+                <div class="section">
+                    <h2 class="section-title">
+                        🏦 Datos Bancarios para Cobro de Subvención
+                    </h2>
+                    <p class="section-subtitle">Cuenta bancaria donde desea recibir la subvención MOVES III</p>
+                    
+                    <div class="info-box">
+                        <h4>📋 Información sobre la cuenta bancaria</h4>
+                        <p>La cuenta bancaria debe estar a nombre del solicitante (titular). La administración realizará la transferencia directamente a esta cuenta una vez aprobada la subvención.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ibanCliente">IBAN de la cuenta bancaria <span class="required">*</span></label>
+                        <input type="text" id="ibanCliente" name="ibanCliente" required 
+                               placeholder="ES00 0000 0000 0000 0000 0000" 
+                               maxlength="34"
+                               class="iban-input"
+                               oninput="formatearIBAN(this); validarIBAN(this);"
+                               onpaste="setTimeout(() => { formatearIBAN(this); validarIBAN(this); }, 10);">
+                        <div id="ibanValidation" class="validation-message"></div>
+                        <div class="help-text">
+                            Introduzca el IBAN completo (24 caracteres para España). Ejemplo: ES91 2100 0418 4502 0005 1332
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="titularCuenta">Titular de la Cuenta <span class="required">*</span></label>
+                            <input type="text" id="titularCuenta" name="titularCuenta" required 
+                                   placeholder="Debe coincidir con el solicitante">
+                            <div class="help-text">Debe ser el mismo nombre que aparece en el DNI/CIF del solicitante</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="entidadBancaria">Entidad Bancaria</label>
+                            <input type="text" id="entidadBancaria" name="entidadBancaria" 
+                                   placeholder="Nombre del banco (opcional)">
+                            <div class="help-text">Campo opcional - Ej: Banco Santander, BBVA, CaixaBank...</div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>⚠️ Importante</h4>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>Verifique que el IBAN sea correcto antes de enviar la solicitud</li>
+                            <li>La cuenta debe estar activa y operativa</li>
+                            <li>El titular debe coincidir exactamente con los datos del solicitante</li>
+                            <li>No se aceptan cuentas de terceros</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 5: AYUDAS Y SUBVENCIONES -->
                 <div class="section">
                     <h2 class="section-title">
                         💰 Ayudas y Subvenciones
@@ -563,7 +648,7 @@
                     </div>
                 </div>
 
-                <!-- SECCIÓN 5: ACHATARRAMIENTO -->
+                <!-- SECCIÓN 6: ACHATARRAMIENTO -->
                 <div class="section">
                     <h2 class="section-title">
                         ♻️ Achatarramiento de Vehículo
@@ -619,7 +704,7 @@
                     </div>
                 </div>
 
-                <!-- SECCIÓN 6: HONORARIOS DE TRAMITACIÓN -->
+                <!-- SECCIÓN 7: HONORARIOS DE TRAMITACIÓN -->
                 <div class="section">
                     <h2 class="section-title">
                         💳 Honorarios de Tramitación
@@ -702,7 +787,7 @@
 
     <script>
         // ========================================
-        // 🚀 SISTEMA DE FORMULARIO PRODUCCIÓN
+        // 🚀 SISTEMA DE FORMULARIO PRODUCCIÓN CON IBAN
         // ========================================
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -710,18 +795,14 @@
             const submitBtn = document.getElementById('submitBtn');
             const progressFill = document.getElementById('progressFill');
 
-            // Actualizar barra de progreso
-            function updateProgress() {
-                const totalSections = 6; // Ahora son 6 secciones incluyendo honorarios
-                const completedSections = document.querySelectorAll('.section').length;
-                const progress = Math.min(100, (completedSections / totalSections) * 100);
-                progressFill.style.width = progress + '%';
-            }
-
-            // Actualizar concepto de pago cuando cambie el nombre
+            // Sincronizar titular con nombre del cliente
             const nombreClienteInput = document.getElementById('nombreCliente');
-            if (nombreClienteInput) {
+            const titularCuentaInput = document.getElementById('titularCuenta');
+
+            if (nombreClienteInput && titularCuentaInput) {
                 nombreClienteInput.addEventListener('input', function() {
+                    titularCuentaInput.value = this.value;
+                    // Actualizar concepto de pago
                     const conceptoPago = document.getElementById('conceptoPago');
                     if (conceptoPago && this.value.trim()) {
                         conceptoPago.textContent = this.value.trim();
@@ -729,6 +810,14 @@
                         conceptoPago.textContent = 'Indique su nombre y apellidos';
                     }
                 });
+            }
+
+            // Actualizar barra de progreso
+            function updateProgress() {
+                const totalSections = 7; // Ahora son 7 secciones incluyendo datos bancarios
+                const completedSections = document.querySelectorAll('.section').length;
+                const progress = Math.min(100, (completedSections / totalSections) * 100);
+                progressFill.style.width = progress + '%';
             }
 
             // 🚀 ENVÍO DEL FORMULARIO - SISTEMA SIMPLIFICADO
@@ -740,11 +829,19 @@
                     return;
                 }
 
+                // Validar IBAN antes del envío
+                const ibanInput = document.getElementById('ibanCliente');
+                if (!validarIBANCompleto(ibanInput.value)) {
+                    alert('Por favor, introduzca un IBAN válido antes de enviar la solicitud.');
+                    ibanInput.focus();
+                    return;
+                }
+
                 // Preparar objeto de datos para JSON
                 const formDataObj = {
                     timestamp: new Date().toISOString(),
-                    source: 'html-production-final',
-                    version: '4.2-production-honorarios',
+                    source: 'html-production-final-iban',
+                    version: '4.3-production-iban',
                     tipoCliente: document.getElementById('tipoCliente').value,
                     nombreCliente: document.getElementById('nombreCliente').value,
                     dniCif: document.getElementById('dniCif').value,
@@ -754,6 +851,11 @@
                     municipio: document.getElementById('municipio').value,
                     codigoPostal: document.getElementById('codigoPostal').value,
                     discapacidad: document.querySelector('input[name="discapacidad"]:checked')?.value || 'No',
+                    // NUEVOS CAMPOS BANCARIOS
+                    ibanCliente: document.getElementById('ibanCliente').value,
+                    titularCuenta: document.getElementById('titularCuenta').value,
+                    entidadBancaria: document.getElementById('entidadBancaria').value || '',
+                    // CAMPOS DEL VEHÍCULO
                     tipoAdquisicion: document.getElementById('tipoAdquisicion').value,
                     marcaModelo: document.getElementById('marcaModelo').value,
                     motorizacion: document.getElementById('motorizacion').value,
@@ -832,6 +934,94 @@
 
             updateProgress();
         });
+
+        // ========================================
+        // 🏦 FUNCIONES DE VALIDACIÓN DE IBAN
+        // ========================================
+
+        function formatearIBAN(input) {
+            // Remover espacios y convertir a mayúsculas
+            let valor = input.value.replace(/\s/g, '').toUpperCase();
+            
+            // Limitar a 24 caracteres para España
+            if (valor.length > 24) {
+                valor = valor.substring(0, 24);
+            }
+            
+            // Añadir espacios cada 4 caracteres
+            let valorFormateado = '';
+            for (let i = 0; i < valor.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    valorFormateado += ' ';
+                }
+                valorFormateado += valor[i];
+            }
+            
+            input.value = valorFormateado;
+        }
+
+        function validarIBAN(input) {
+            const iban = input.value.replace(/\s/g, '');
+            const validationDiv = document.getElementById('ibanValidation');
+            
+            if (iban.length === 0) {
+                input.className = input.className.replace(/\s*(iban-valid|iban-invalid)/g, '');
+                validationDiv.innerHTML = '';
+                return;
+            }
+            
+            if (validarIBANCompleto(iban)) {
+                input.className = input.className.replace(/\s*(iban-valid|iban-invalid)/g, '') + ' iban-valid';
+                validationDiv.innerHTML = '<span class="validation-success">✅ IBAN válido</span>';
+            } else {
+                input.className = input.className.replace(/\s*(iban-valid|iban-invalid)/g, '') + ' iban-invalid';
+                if (iban.length < 24) {
+                    validationDiv.innerHTML = '<span class="validation-error">⚠️ El IBAN debe tener 24 caracteres</span>';
+                } else {
+                    validationDiv.innerHTML = '<span class="validation-error">❌ IBAN no válido - Verifique los dígitos</span>';
+                }
+            }
+        }
+
+        function validarIBANCompleto(iban) {
+            // Remover espacios y convertir a mayúsculas
+            iban = iban.replace(/\s/g, '').toUpperCase();
+            
+            // Verificar longitud mínima
+            if (iban.length < 15) return false;
+            
+            // Verificar que empiece con 2 letras
+            if (!/^[A-Z]{2}/.test(iban)) return false;
+            
+            // Para España, verificar longitud exacta
+            if (iban.startsWith('ES') && iban.length !== 24) return false;
+            
+            // Algoritmo mod-97 para validar IBAN
+            try {
+                // Mover los primeros 4 caracteres al final
+                const reordenado = iban.substring(4) + iban.substring(0, 4);
+                
+                // Convertir letras a números (A=10, B=11, ..., Z=35)
+                let numerico = '';
+                for (let char of reordenado) {
+                    if (char >= 'A' && char <= 'Z') {
+                        numerico += (char.charCodeAt(0) - 65 + 10).toString();
+                    } else {
+                        numerico += char;
+                    }
+                }
+                
+                // Calcular mod 97
+                let resto = 0;
+                for (let i = 0; i < numerico.length; i++) {
+                    resto = (resto * 10 + parseInt(numerico[i])) % 97;
+                }
+                
+                return resto === 1;
+            } catch (e) {
+                return false;
+            }
+        }
 
         // ========================================
         // 🔄 FUNCIONES DE VISIBILIDAD CONDICIONAL
